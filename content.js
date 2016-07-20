@@ -4,7 +4,7 @@
   var horzMid = $(window).width() / 2;
 
 
-
+  $('head').append('<link rel="stylesheet" href="'+chrome.extension.getURL("assets/font-awesome-4.6.3/css/font-awesome.min.css")+'">');
   $('head').attr('class', 'exempt');
   $('html').attr('class', 'exempt');
   $('body').attr('class', 'exempt');
@@ -12,6 +12,8 @@
   $('body').css('left', horzMid);
   $('body').css('top', vertMid);
   $('body').css("background-color", 'gainsboro');
+  window.interval = true;
+
   var $all = $('*');
 
   function getRandomInt(min, max) {
@@ -33,11 +35,34 @@
     });
   }
 
+  var $pause = $('<i class="fa fa-pause exempt" aria-hidden="true"></i>');
+  $pause.css('position', 'fixed');
+  $pause.css('color', 'black');
+  $pause.css('left', 0);
+  $pause.css('top', 0);
+  $pause.css('margin', '20px');
+  $pause.css('cursor', 'pointer');
+  $('body').append($pause);
+
   transform();
-  setInterval(function(){
+  window.interval = setInterval(function(){
     transform();
-    console.log('cycle');
   }, 11000);
+
+  // $pause.on('click', function(){
+  //   if (window.isRunning) {
+  //     clearInterval(window.interval);
+  //     window.isRunning = false;
+  //     console.log(window.isRunning);
+  //   } else {
+  //     window.interval = setInterval(function(){
+  //       transform();
+  //     }, 11000);
+  //     window.isRunning = true;
+  //     console.log(window.isRunning);
+  //   }
+  // });
+
 
 
 
