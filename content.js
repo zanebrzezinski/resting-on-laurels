@@ -12,7 +12,7 @@
   $('body').css('left', horzMid);
   $('body').css('top', vertMid);
   $('body').css("background-color", 'gainsboro');
-  window.interval = true;
+  window.isRunning = true;
 
   var $all = $('*');
 
@@ -32,10 +32,15 @@
         var str = 'rotate3d('+getRandomInt(0,20)+','+getRandomInt(0,20)+','+getRandomInt(0,20)+','+getRandomInt(-90,90)+'deg)';
         $(this).css('transform', str);
       }
+      if (!window.isRunning) {
+        $('#pause-play').attr('class', 'fa fa-pause exempt');
+      } else {
+        $('#pause-play').attr('class', 'fa fa-play exempt');
+      }
     });
   }
 
-  var $pause = $('<i class="fa fa-pause exempt" aria-hidden="true"></i>');
+  var $pause = $('<i class="fa fa-pause exempt" id="pause-play" aria-hidden="true"></i>');
   $pause.css('position', 'fixed');
   $pause.css('color', 'black');
   $pause.css('left', 0);
@@ -49,19 +54,20 @@
     transform();
   }, 11000);
 
-  // $pause.on('click', function(){
-  //   if (window.isRunning) {
-  //     clearInterval(window.interval);
-  //     window.isRunning = false;
-  //     console.log(window.isRunning);
-  //   } else {
-  //     window.interval = setInterval(function(){
-  //       transform();
-  //     }, 11000);
-  //     window.isRunning = true;
-  //     console.log(window.isRunning);
-  //   }
-  // });
+  $pause.on('click', function(){
+    if (window.isRunning) {
+      clearInterval(window.interval);
+      window.isRunning = false;
+      console.log(window.isRunning);
+    } else {
+      transform();
+      window.interval = setInterval(function(){
+        transform();
+      }, 11000);
+      window.isRunning = true;
+      console.log(window.isRunning);
+    }
+  });
 
 
 
