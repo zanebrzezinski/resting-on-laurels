@@ -16,7 +16,7 @@
   },
   "web_accessible_resources": ["assets/*"],
   "content_scripts": [ {
-    "js": [ "jquery-3.1.0.min.js" ],
+    "js": [ "jquery-3.1.0.min.js", "seamlessLoop.js" ],
     "matches": [ "http://*/*", "https://*/*"]
   }],
   "permissions": [
